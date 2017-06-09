@@ -1,0 +1,41 @@
+C:\Users\Sathya\Pictures\SCOUT-master\bin\Bot Application.dll.config
+C:\Users\Sathya\Pictures\SCOUT-master\bin\Bot Application.dll
+C:\Users\Sathya\Pictures\SCOUT-master\bin\Bot Application.pdb
+C:\Users\Sathya\Pictures\SCOUT-master\bin\Autofac.dll
+C:\Users\Sathya\Pictures\SCOUT-master\bin\Chronic.dll
+C:\Users\Sathya\Pictures\SCOUT-master\bin\Microsoft.Bot.Builder.Autofac.dll
+C:\Users\Sathya\Pictures\SCOUT-master\bin\Microsoft.Bot.Builder.dll
+C:\Users\Sathya\Pictures\SCOUT-master\bin\Microsoft.Bot.Connector.dll
+C:\Users\Sathya\Pictures\SCOUT-master\bin\Microsoft.IdentityModel.Protocol.Extensions.dll
+C:\Users\Sathya\Pictures\SCOUT-master\bin\Microsoft.Rest.ClientRuntime.dll
+C:\Users\Sathya\Pictures\SCOUT-master\bin\Microsoft.WindowsAzure.Configuration.dll
+C:\Users\Sathya\Pictures\SCOUT-master\bin\Newtonsoft.Json.dll
+C:\Users\Sathya\Pictures\SCOUT-master\bin\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Sathya\Pictures\SCOUT-master\bin\System.Net.Http.Formatting.dll
+C:\Users\Sathya\Pictures\SCOUT-master\bin\System.Web.Http.dll
+C:\Users\Sathya\Pictures\SCOUT-master\bin\System.Web.Http.WebHost.dll
+C:\Users\Sathya\Pictures\SCOUT-master\bin\Autofac.xml
+C:\Users\Sathya\Pictures\SCOUT-master\bin\Microsoft.Bot.Builder.xml
+C:\Users\Sathya\Pictures\SCOUT-master\bin\Microsoft.Bot.Builder.Autofac.xml
+C:\Users\Sathya\Pictures\SCOUT-master\bin\Microsoft.Bot.Connector.xml
+C:\Users\Sathya\Pictures\SCOUT-master\bin\Microsoft.IdentityModel.Protocol.Extensions.xml
+C:\Users\Sathya\Pictures\SCOUT-master\bin\Microsoft.WindowsAzure.Configuration.xml
+C:\Users\Sathya\Pictures\SCOUT-master\bin\Newtonsoft.Json.xml
+C:\Users\Sathya\Pictures\SCOUT-master\bin\System.IdentityModel.Tokens.Jwt.xml
+C:\Users\Sathya\Pictures\SCOUT-master\bin\System.Net.Http.Formatting.xml
+C:\Users\Sathya\Pictures\SCOUT-master\bin\System.Web.Http.xml
+C:\Users\Sathya\Pictures\SCOUT-master\bin\System.Web.Http.WebHost.xml
+C:\Users\Sathya\Pictures\SCOUT-master\bin\ar\Microsoft.Bot.Builder.resources.dll
+C:\Users\Sathya\Pictures\SCOUT-master\bin\cs\Microsoft.Bot.Builder.resources.dll
+C:\Users\Sathya\Pictures\SCOUT-master\bin\de-dE\Microsoft.Bot.Builder.resources.dll
+C:\Users\Sathya\Pictures\SCOUT-master\bin\en\Microsoft.Bot.Builder.resources.dll
+C:\Users\Sathya\Pictures\SCOUT-master\bin\es\Microsoft.Bot.Builder.resources.dll
+C:\Users\Sathya\Pictures\SCOUT-master\bin\fa\Microsoft.Bot.Builder.resources.dll
+C:\Users\Sathya\Pictures\SCOUT-master\bin\fr\Microsoft.Bot.Builder.resources.dll
+C:\Users\Sathya\Pictures\SCOUT-master\bin\ja\Microsoft.Bot.Builder.resources.dll
+C:\Users\Sathya\Pictures\SCOUT-master\bin\ru\Microsoft.Bot.Builder.resources.dll
+C:\Users\Sathya\Pictures\SCOUT-master\bin\zh-hans\Microsoft.Bot.Builder.resources.dll
+C:\Users\Sathya\Pictures\SCOUT-master\obj\x86\Debug\Scout.csprojResolveAssemblyReference.cache
+C:\Users\Sathya\Pictures\SCOUT-master\obj\x86\Debug\Scout.csproj.ResolveComReference.cache
+C:\Users\Sathya\Pictures\SCOUT-master\obj\x86\Debug\Bot Application.dll
+C:\Users\Sathya\Pictures\SCOUT-master\obj\x86\Debug\Bot Application.pdb
