@@ -44,7 +44,7 @@ namespace Scout.Dialogs
             System.Data.DataTable dtExcel;
             dtExcel = new System.Data.DataTable();
             dtExcel.TableName = "MyExcelData";
-            string SourceConstr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source='C:\\Users\\Sathya\\Pictures\\SCOUT-master\\Dialogs\\eamcetdataset.xlsx';Extended Properties= 'Excel 8.0;HDR=Yes;IMEX=1'";
+            string SourceConstr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source='~\eamcetdataset.xlsx';Extended Properties= 'Excel 8.0;HDR=Yes;IMEX=1'";
             OleDbConnection con = new OleDbConnection(SourceConstr);
             string query = "Select * from [Sheet1$]";
             OleDbDataAdapter data = new OleDbDataAdapter(query, con);
@@ -83,7 +83,7 @@ namespace Scout.Dialogs
             System.Data.DataTable dtExcel;
             dtExcel = new System.Data.DataTable();
             dtExcel.TableName = "MyExcelData";
-            string SourceConstr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source='C:\\Users\\Sathya\\Pictures\\SCOUT-master\\Dialogs\\eamcetdataset.xlsx';Extended Properties= 'Excel 8.0;HDR=Yes;IMEX=1'";
+            string SourceConstr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source='~\eamcetdataset.xlsx';Extended Properties= 'Excel 8.0;HDR=Yes;IMEX=1'";
             OleDbConnection con = new OleDbConnection(SourceConstr);
             string query = "Select * from [Sheet1$]";
             OleDbDataAdapter data = new OleDbDataAdapter(query, con);
@@ -115,7 +115,7 @@ namespace Scout.Dialogs
             System.Data.DataTable dtExcel;
             dtExcel = new System.Data.DataTable();
             dtExcel.TableName = "MyExcelData";
-            string SourceConstr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source='C:\\Users\\Sathya\\Pictures\\SCOUT-master\\Dialogs\\eamcetdataset.xlsx';Extended Properties= 'Excel 8.0;HDR=Yes;IMEX=1'";
+            string SourceConstr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source='~\eamcetdataset.xlsx';Extended Properties= 'Excel 8.0;HDR=Yes;IMEX=1'";
             OleDbConnection con = new OleDbConnection(SourceConstr);
             string query = "Select * from [Sheet1$]";
             OleDbDataAdapter data = new OleDbDataAdapter(query, con);
@@ -149,7 +149,7 @@ namespace Scout.Dialogs
             System.Data.DataTable dtExcel;
             dtExcel = new System.Data.DataTable();
                 dtExcel.TableName = "MyExcelData";
-                string SourceConstr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source='C:\\Users\\Sathya\\Pictures\\SCOUT-master\\Dialogs\\eamcetdataset.xlsx';Extended Properties= 'Excel 8.0;HDR=Yes;IMEX=1'";
+                string SourceConstr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source='~\eamcetdataset.xlsx';Extended Properties= 'Excel 8.0;HDR=Yes;IMEX=1'";
                 OleDbConnection con = new OleDbConnection(SourceConstr);
             string query = "Select * from [Sheet1$]";
                 OleDbDataAdapter data = new OleDbDataAdapter(query, con);
@@ -181,7 +181,7 @@ namespace Scout.Dialogs
             System.Data.DataTable dtExcel;
             dtExcel = new System.Data.DataTable();
             dtExcel.TableName = "MyExcelData";
-            string SourceConstr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source='C:\\Users\\Sathya\\Pictures\\SCOUT-master\\Dialogs\\eamcetdataset.xlsx';Extended Properties= 'Excel 8.0;HDR=Yes;IMEX=1'";
+            string SourceConstr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source='~\eamcetdataset.xlsx';Extended Properties= 'Excel 8.0;HDR=Yes;IMEX=1'";
             OleDbConnection con = new OleDbConnection(SourceConstr);
             string query = "Select * from [Sheet1$]";
             OleDbDataAdapter data = new OleDbDataAdapter(query, con);
@@ -203,6 +203,104 @@ namespace Scout.Dialogs
             await context.PostAsync(res);
             context.Wait(MessageReceived);
         }
+
+        [LuisIntent("getWomen")]
+        public async Task getWomen(IDialogContext context, LuisResult result)
+        {
+            var womenEntity = result.Entities.SingleOrDefault(e => e.Type == "Womens");
+            DataTable dtExcel = new DataTable();
+            dtExcel.Clear();
+
+            dtExcel.Columns.Add("College");
+            dtExcel.Columns.Add("Region");
+
+            dtExcel.Columns.Add("Rank");
+            dtExcel.Columns.Add("Location");
+            dtExcel.Columns.Add("Women");
+            DataRow _r1 = dtExcel.NewRow();
+
+            _r1["College"] = "JOGINPALLY MN RAO WOMENS ENGINEERING COLLEGE";
+            _r1["Region"] = "OU";
+            _r1["Rank"] = 77827;
+            _r1["Location"] = "YENKAPALLY";
+            _r1["Women"] = "women";
+            dtExcel.Rows.Add(_r1);
+            DataRow _r2 = dtExcel.NewRow();
+
+            _r2["College"] = "G NARAYNAMMA INSTITUTE OF TECHNOLOGY AND SCIENCE";
+            _r2["Region"] = "OU";
+            _r2["Rank"] = 9756;
+            _r2["Location"] = "RAYADURG";
+            _r2["Women"] = "women";
+            dtExcel.Rows.Add(_r2);
+            DataRow _r3 = dtExcel.NewRow();
+
+            _r3["College"] = "BHOJREDDY ENGINERING COLLEGE FOR WOMEN";
+            _r3["Region"] = "OU";
+            _r3["Location"] = "SAIDABAD";
+            _r3["Rank"] = 21186;
+            _r3["Women"] = "women";
+            dtExcel.Rows.Add(_r3);
+            DataRow _r4 = dtExcel.NewRow();
+            _r4["College"] = "BVRIT COLLEGE OF ENGINEERING FOR WOMEN";
+            _r4["Region"] = "OU";
+            _r4["Location"] = "BACHUPALLY";
+            _r4["Rank"] = 11556;
+            _r4["Women"] = "women";
+            dtExcel.Rows.Add(_r4);
+            DataRow _r5 = dtExcel.NewRow();
+
+            _r5["College"] = "MALLA REDDY WOMENS ENGINEERING COLLEGE";
+            _r5["Region"] = "OU";
+            _r5["Location"] = "MAISAMMAGUDA";
+            _r5["Rank"] = 83450;
+            _r5["Women"] = "women";
+            DataRow _r6 = dtExcel.NewRow();
+
+            _r6["College"] = "SAHASRA COLLEGE OF ENGINEERING FOR WOMEN";
+            _r6["Region"] = "OU";
+            _r6["Location"] = "WARANGAL";
+            _r6["Rank"] = 25670;
+            _r6["Women"] = "women";
+            DataRow _r7 = dtExcel.NewRow();
+
+            _r7["College"] = "SRIDEVI WOMENS ENGINEERING COLLEGE";
+            _r7["Region"] = "OU";
+            _r7["Location"] = "GANDIPET";
+            _r7["Rank"] = 83569;
+            _r7["Women"] = "women";
+            DataRow _r8 = dtExcel.NewRow();
+
+            _r8["College"] = "STANLEY COLLEGE OF ENGINEERING AND TECHNOLOGY FOR WOMEN";
+            _r8["Region"] = "OU";
+            _r8["Location"] = "ABIDS";
+            _r8["Rank"] = 73438;
+            _r8["Women"] = "women";
+            DataRow _r9 = dtExcel.NewRow();
+
+            _r9["College"] = "VIJAY COLLEGE OF ENGINEERING AND TECHNOLOGY FOR WOMEN";
+            _r9["Region"] = "OU";
+            _r9["Location"] = "NIZAMBAD";
+            _r9["Rank"] = 206570;
+            _r9["Women"] = "women";
+            string expression = "Women = '" + womenEntity.Entity + "'";
+
+            DataRow[] foundRows;
+
+            // Use the Select method to find all rows matching the filter.
+            foundRows = dtExcel.Select(expression);
+
+            //Print column 0 of each returned row.
+            string res = "";
+
+            for (int i = 0; i < foundRows.Length; i++)
+            {
+                res += foundRows[i][0] + "    " + "<br />";
+            }
+            await context.PostAsync(res);
+            context.Wait(MessageReceived);
+        }
+
 
 
         [LuisIntent("")]
