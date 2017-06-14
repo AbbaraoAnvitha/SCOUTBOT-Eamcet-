@@ -127,6 +127,9 @@
     </Content>
     <Content Include="eamcetdataset.xlsx" />
     <Content Include="Dialogs\eamcetdataset.xlsx" />
+    <Content Include="Dialogs\Backup of TSEAMCET_2016_LASTRANKS.xlk" />
+    <Content Include="Dialogs\lastyeareamcetdata.xlsx" />
+    <None Include="Properties\PublishProfiles\Scout20170613024912 - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -16,7 +16,7 @@ using System.Text;
 
 namespace Scout.Dialogs
 {
-    [LuisModel("9f2949ee-4120-4433-a0be-0e633f339718", "c59ef1ca4a0e41e7ad228294d92ae597")]
+    [LuisModel("45947ae2-2ebc-4b23-b5ec-edb3737cce36", "febf3373a94248f58270ac13750938f8")]
     [Serializable]
     public class ScoutDialog : LuisDialog<object>
     {
@@ -44,17 +44,17 @@ namespace Scout.Dialogs
             System.Data.DataTable dtExcel;
             dtExcel = new System.Data.DataTable();
             dtExcel.TableName = "MyExcelData";
-            string SourceConstr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source='~\eamcetdataset.xlsx';Extended Properties= 'Excel 8.0;HDR=Yes;IMEX=1'";
+            string SourceConstr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source='https://1drv.ms/x/s!ApIHITBg7L50gsQOMBbo9kX4gxpiPA⁠⁠⁠⁠';Extended Properties= 'Excel 8.0;HDR=Yes;IMEX=1'";
             OleDbConnection con = new OleDbConnection(SourceConstr);
             string query = "Select * from [Sheet1$]";
             OleDbDataAdapter data = new OleDbDataAdapter(query, con);
             data.Fill(dtExcel);
 
-            string expression = "ocg >= " + Int32.Parse(rankEntity.Entity) + " AND ocg <="+Int32.Parse(rankEntity.Entity)+5000;
+            string expression = "GIRLS >= " + Int32.Parse(rankEntity.Entity) + " AND GIRLS <="+Int32.Parse(rankEntity.Entity)+5000;
             DataRow[] foundRows;
 
             // Use the Select method to find all rows matching the filter.
-            foundRows = dtExcel.Select(expression,"ocg ASC");
+            foundRows = dtExcel.Select(expression,"GIRLS ASC");
 
             //Print column 0 of each returned row.
 
@@ -63,7 +63,7 @@ namespace Scout.Dialogs
             for (int i = 0; i < foundRows.Length; i++)
             {
                 k++;
-                res += foundRows[i][0] +  "<br />";
+                res += foundRows[i][1] +  "<br />";
                 if(k == 20)
                 {
                     break;
@@ -75,6 +75,100 @@ namespace Scout.Dialogs
             context.Wait(MessageReceived);
             
         }
+        [LuisIntent("getLocation")]
+        public async Task getLocation(IDialogContext context, LuisResult result)
+        {
+            var LocationEntity = result.Entities.SingleOrDefault(e => e.Type == "Location");
+
+            System.Data.DataTable dtExcel;
+            dtExcel = new System.Data.DataTable();
+            dtExcel.TableName = "MyExcelData";
+            string SourceConstr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source='C:\\Users\\Sathya\\Pictures\\SCOUT-master\\Dialogs\\lastyeareamcetdata.xlsx';Extended Properties= 'Excel 8.0;HDR=Yes;IMEX=1'";
+            OleDbConnection con = new OleDbConnection(SourceConstr);
+            string query = "Select * from [Sheet1$]";
+            OleDbDataAdapter data = new OleDbDataAdapter(query, con);
+            data.Fill(dtExcel);
+            string expression = "Location = '" + LocationEntity.Entity.ToUpper() + "'";
+            DataRow[] foundRows;
+
+            // Use the Select method to find all rows matching the filter.
+            foundRows = dtExcel.Select(expression);
+
+            //Print column 0 of each returned row.
+            string res = "";
+
+           
+            for (int i = 0; i < foundRows.Length; i++)
+            {
+                res += foundRows[i][1] + "   ---  " + foundRows[i][7] + "     " + "<br />";
+            }
+
+            await context.PostAsync(res);
+            context.Wait(MessageReceived);
+
+        }
+        [LuisIntent("getFee")]
+        public async Task getFee(IDialogContext context, LuisResult result)
+        {
+            var CollegeEntity = result.Entities.SingleOrDefault(e => e.Type == "College");
+
+            System.Data.DataTable dtExcel;
+            dtExcel = new System.Data.DataTable();
+            dtExcel.TableName = "MyExcelData";
+            string SourceConstr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source='C:\\Users\\Sathya\\Pictures\\SCOUT-master\\Dialogs\\lastyeareamcetdata.xlsx';Extended Properties= 'Excel 8.0;HDR=Yes;IMEX=1'";
+            OleDbConnection con = new OleDbConnection(SourceConstr);
+            string query = "Select * from [Sheet1$]";
+            OleDbDataAdapter data = new OleDbDataAdapter(query, con);
+            data.Fill(dtExcel);
+            string expression = "College = '" + CollegeEntity.Entity.ToUpper() + "'";
+            DataRow[] foundRows;
+
+            // Use the Select method to find all rows matching the filter.
+            foundRows = dtExcel.Select(expression);
+
+            //Print column 0 of each returned row.
+            string res = "";
+
+
+           
+                res ="The fee details of "+ CollegeEntity.Entity+" "+"Rs:"+"" + foundRows[0][24] + "   " + "<br />";
+           
+
+            await context.PostAsync(res);
+            context.Wait(MessageReceived);
+
+        }
+        [LuisIntent("getAffiliation")]
+        public async Task getAffiliation(IDialogContext context, LuisResult result)
+        {
+            var CollegeEntity = result.Entities.SingleOrDefault(e => e.Type == "College");
+
+            System.Data.DataTable dtExcel;
+            dtExcel = new System.Data.DataTable();
+            dtExcel.TableName = "MyExcelData";
+            string SourceConstr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source='C:\\Users\\Sathya\\Pictures\\SCOUT-master\\Dialogs\\lastyeareamcetdata.xlsx';Extended Properties= 'Excel 8.0;HDR=Yes;IMEX=1'";
+            OleDbConnection con = new OleDbConnection(SourceConstr);
+            string query = "Select * from [Sheet1$]";
+            OleDbDataAdapter data = new OleDbDataAdapter(query, con);
+            data.Fill(dtExcel);
+            string expression = "College = '" + CollegeEntity.Entity.ToUpper() + "'";
+            DataRow[] foundRows;
+
+            // Use the Select method to find all rows matching the filter.
+            foundRows = dtExcel.Select(expression);
+
+            //Print column 0 of each returned row.
+            string res = "";
+
+
+
+            res =   CollegeEntity.Entity + "is affiliated to "  + foundRows[0][25] + "   " + "<br />";
+
+
+            await context.PostAsync(res);
+            context.Wait(MessageReceived);
+
+        }
 
         [LuisIntent("getBestBranch")]
         public async Task getBestBranch(IDialogContext context, LuisResult result)
@@ -83,7 +177,7 @@ namespace Scout.Dialogs
             System.Data.DataTable dtExcel;
             dtExcel = new System.Data.DataTable();
             dtExcel.TableName = "MyExcelData";
-            string SourceConstr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source='~\eamcetdataset.xlsx';Extended Properties= 'Excel 8.0;HDR=Yes;IMEX=1'";
+            string SourceConstr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source='C:\\Users\\Sathya\\Pictures\\SCOUT-master\\Dialogs\\lastyeareamcetdata.xlsx';Extended Properties= 'Excel 8.0;HDR=Yes;IMEX=1'";
             OleDbConnection con = new OleDbConnection(SourceConstr);
             string query = "Select * from [Sheet1$]";
             OleDbDataAdapter data = new OleDbDataAdapter(query, con);
@@ -93,11 +187,11 @@ namespace Scout.Dialogs
             DataRow[] foundRows;
 
             // Use the Select method to find all rows matching the filter.
-            foundRows = dtExcel.Select(expression,"ocg ASC");
+            foundRows = dtExcel.Select(expression,"GIRLS ASC");
 
             //Print column 0 of each returned row.
             string res = "";
-                res += foundRows[0][1] + " " + Environment.NewLine;
+                res += foundRows[0][6] + " " + Environment.NewLine;
           
 
 
@@ -115,7 +209,7 @@ namespace Scout.Dialogs
             System.Data.DataTable dtExcel;
             dtExcel = new System.Data.DataTable();
             dtExcel.TableName = "MyExcelData";
-            string SourceConstr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source='~\eamcetdataset.xlsx';Extended Properties= 'Excel 8.0;HDR=Yes;IMEX=1'";
+            string SourceConstr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source='C:\\Users\\Sathya\\Pictures\\SCOUT-master\\Dialogs\\lastyeareamcetdata.xlsx';Extended Properties= 'Excel 8.0;HDR=Yes;IMEX=1'";
             OleDbConnection con = new OleDbConnection(SourceConstr);
             string query = "Select * from [Sheet1$]";
             OleDbDataAdapter data = new OleDbDataAdapter(query, con);
@@ -132,7 +226,7 @@ namespace Scout.Dialogs
 
             for (int i = 0; i < foundRows.Length; i++)
             {
-                res += foundRows[i][1] + new string(' ',10) + foundRows[i][3] + new string(' ', 10) + foundRows[i][5] + new string(' ', 10) + foundRows[i][7] + new string(' ', 10) + foundRows[i][9] + "<br />";
+                res += foundRows[i][8] + new string(' ',10) + foundRows[i][9] + new string(' ', 10) + foundRows[i][10] + new string(' ', 10) + foundRows[i][11] + new string(' ', 10) + foundRows[i][12] + new string(' ', 10) + foundRows[i][13] + new string(' ', 10) + foundRows[i][14] + new string(' ', 10) + foundRows[i][15] + new string(' ', 10) + foundRows[i][16] + new string(' ', 10) + foundRows[i][17] + new string(' ', 10) + foundRows[i][18] + new string(' ', 10) + foundRows[i][19] + new string(' ', 10) + foundRows[i][20] + new string(' ', 10) + foundRows[i][21] + new string(' ', 10) + foundRows[i][22] + new string(' ', 10) + foundRows[i][23] + new string(' ', 10) + "<br />";
             }
 
 
@@ -149,7 +243,7 @@ namespace Scout.Dialogs
             System.Data.DataTable dtExcel;
             dtExcel = new System.Data.DataTable();
                 dtExcel.TableName = "MyExcelData";
-                string SourceConstr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source='~\eamcetdataset.xlsx';Extended Properties= 'Excel 8.0;HDR=Yes;IMEX=1'";
+                string SourceConstr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source='C:\\Users\\Sathya\\Pictures\\SCOUT-master\\Dialogs\\lastyeareamcetdata.xlsx';Extended Properties= 'Excel 8.0;HDR=Yes;IMEX=1'";
                 OleDbConnection con = new OleDbConnection(SourceConstr);
             string query = "Select * from [Sheet1$]";
                 OleDbDataAdapter data = new OleDbDataAdapter(query, con);
@@ -166,7 +260,7 @@ namespace Scout.Dialogs
            
             for (int i = 0; i < foundRows.Length; i++)
             {
-                res += foundRows[i][1] + "     "+ "<br />";
+                res += foundRows[i][7] + "     "+ "<br />";
             }
             
             await context.PostAsync(res);
@@ -181,7 +275,7 @@ namespace Scout.Dialogs
             System.Data.DataTable dtExcel;
             dtExcel = new System.Data.DataTable();
             dtExcel.TableName = "MyExcelData";
-            string SourceConstr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source='~\eamcetdataset.xlsx';Extended Properties= 'Excel 8.0;HDR=Yes;IMEX=1'";
+            string SourceConstr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source='C:\\Users\\Sathya\\Pictures\\SCOUT-master\\Dialogs\\eamcetdataset.xlsx';Extended Properties= 'Excel 8.0;HDR=Yes;IMEX=1'";
             OleDbConnection con = new OleDbConnection(SourceConstr);
             string query = "Select * from [Sheet1$]";
             OleDbDataAdapter data = new OleDbDataAdapter(query, con);
