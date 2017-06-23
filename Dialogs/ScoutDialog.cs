@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Threading.Tasks;
 using System.Data.OleDb;
+using Microsoft.Rest.Serialization;
+using Microsoft.Rest;
+using Newtonsoft.Json;
 
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
@@ -23,7 +26,7 @@ namespace Scout.Dialogs
         [LuisIntent("getIntro")]
         public async Task getIntro(IDialogContext context, LuisResult result)
         {
-            string res = "Hi, I am scout and I will help you in finding colleges for your eamcet rank. <br />You can also get the colleges rank information by entering the college name <br />Example: Get the ranks of bvrith<br />";
+            string res = "Hi, I am scout and I will help you in finding colleges for your eamcet rank. <br />You can also get the colleges rank information by entering the college name <br />Example: Colleges i can get for rank 3000<br />";
             await context.PostAsync(res);
             context.Wait(MessageReceived);
         }
@@ -44,17 +47,17 @@ namespace Scout.Dialogs
             System.Data.DataTable dtExcel;
             dtExcel = new System.Data.DataTable();
             dtExcel.TableName = "MyExcelData";
-            string SourceConstr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source='https://1drv.ms/x/s!ApIHITBg7L50gsQOMBbo9kX4gxpiPA⁠⁠⁠⁠';Extended Properties= 'Excel 8.0;HDR=Yes;IMEX=1'";
+            string SourceConstr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=$'https://1drv.ms/x/s!ApIHITBg7L50gsQOMBbo9kX4gxpiPA';Extended Properties= 'Excel 8.0;HDR=Yes;IMEX=1'";
             OleDbConnection con = new OleDbConnection(SourceConstr);
             string query = "Select * from [Sheet1$]";
             OleDbDataAdapter data = new OleDbDataAdapter(query, con);
             data.Fill(dtExcel);
-
-            string expression = "GIRLS >= " + Int32.Parse(rankEntity.Entity) + " AND GIRLS <="+Int32.Parse(rankEntity.Entity)+5000;
+          
+            string expression = "GIRLS >= " + Int32.Parse(rankEntity.Entity) + " AND GIRLS <=" + Int32.Parse(rankEntity.Entity) + 5000;
             DataRow[] foundRows;
 
             // Use the Select method to find all rows matching the filter.
-            foundRows = dtExcel.Select(expression,"GIRLS ASC");
+            foundRows = dtExcel.Select(expression, "[GIRLS] ASC");
 
             //Print column 0 of each returned row.
 
@@ -63,8 +66,8 @@ namespace Scout.Dialogs
             for (int i = 0; i < foundRows.Length; i++)
             {
                 k++;
-                res += foundRows[i][1] +  "<br />";
-                if(k == 20)
+                res += foundRows[i][1] + "<br />";
+                if (k == 20)
                 {
                     break;
                 }
@@ -73,7 +76,7 @@ namespace Scout.Dialogs
 
             await context.PostAsync(res);
             context.Wait(MessageReceived);
-            
+
         }
         [LuisIntent("getLocation")]
         public async Task getLocation(IDialogContext context, LuisResult result)
@@ -97,7 +100,7 @@ namespace Scout.Dialogs
             //Print column 0 of each returned row.
             string res = "";
 
-           
+
             for (int i = 0; i < foundRows.Length; i++)
             {
                 res += foundRows[i][1] + "   ---  " + foundRows[i][7] + "     " + "<br />";
@@ -130,9 +133,9 @@ namespace Scout.Dialogs
             string res = "";
 
 
-           
-                res ="The fee details of "+ CollegeEntity.Entity+" "+"Rs:"+"" + foundRows[0][24] + "   " + "<br />";
-           
+
+            res = "The fee details of " + CollegeEntity.Entity + " " + "Rs:" + "" + foundRows[0][24] + "   " + "<br />";
+
 
             await context.PostAsync(res);
             context.Wait(MessageReceived);
@@ -162,7 +165,7 @@ namespace Scout.Dialogs
 
 
 
-            res =   CollegeEntity.Entity + "is affiliated to "  + foundRows[0][25] + "   " + "<br />";
+            res = CollegeEntity.Entity + "is affiliated to " + foundRows[0][25] + "   " + "<br />";
 
 
             await context.PostAsync(res);
@@ -187,12 +190,12 @@ namespace Scout.Dialogs
             DataRow[] foundRows;
 
             // Use the Select method to find all rows matching the filter.
-            foundRows = dtExcel.Select(expression,"GIRLS ASC");
+            foundRows = dtExcel.Select(expression, "GIRLS ASC");
 
             //Print column 0 of each returned row.
             string res = "";
-                res += foundRows[0][6] + " " + Environment.NewLine;
-          
+            res += foundRows[0][6] + " " + Environment.NewLine;
+
 
 
 
@@ -203,7 +206,7 @@ namespace Scout.Dialogs
         [LuisIntent("getRank")]
         public async Task getRank(IDialogContext context, LuisResult result)
         {
-          
+
             var collegeEntity = result.Entities.SingleOrDefault(e => e.Type == "College");
 
             System.Data.DataTable dtExcel;
@@ -226,7 +229,7 @@ namespace Scout.Dialogs
 
             for (int i = 0; i < foundRows.Length; i++)
             {
-                res += foundRows[i][8] + new string(' ',10) + foundRows[i][9] + new string(' ', 10) + foundRows[i][10] + new string(' ', 10) + foundRows[i][11] + new string(' ', 10) + foundRows[i][12] + new string(' ', 10) + foundRows[i][13] + new string(' ', 10) + foundRows[i][14] + new string(' ', 10) + foundRows[i][15] + new string(' ', 10) + foundRows[i][16] + new string(' ', 10) + foundRows[i][17] + new string(' ', 10) + foundRows[i][18] + new string(' ', 10) + foundRows[i][19] + new string(' ', 10) + foundRows[i][20] + new string(' ', 10) + foundRows[i][21] + new string(' ', 10) + foundRows[i][22] + new string(' ', 10) + foundRows[i][23] + new string(' ', 10) + "<br />";
+                res += foundRows[i][8] + new string(' ', 10) + foundRows[i][9] + new string(' ', 10) + foundRows[i][10] + new string(' ', 10) + foundRows[i][11] + new string(' ', 10) + foundRows[i][12] + new string(' ', 10) + foundRows[i][13] + new string(' ', 10) + foundRows[i][14] + new string(' ', 10) + foundRows[i][15] + new string(' ', 10) + foundRows[i][16] + new string(' ', 10) + foundRows[i][17] + new string(' ', 10) + foundRows[i][18] + new string(' ', 10) + foundRows[i][19] + new string(' ', 10) + foundRows[i][20] + new string(' ', 10) + foundRows[i][21] + new string(' ', 10) + foundRows[i][22] + new string(' ', 10) + foundRows[i][23] + new string(' ', 10) + "<br />";
             }
 
 
@@ -242,14 +245,14 @@ namespace Scout.Dialogs
 
             System.Data.DataTable dtExcel;
             dtExcel = new System.Data.DataTable();
-                dtExcel.TableName = "MyExcelData";
-                string SourceConstr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source='C:\\Users\\Sathya\\Pictures\\SCOUT-master\\Dialogs\\lastyeareamcetdata.xlsx';Extended Properties= 'Excel 8.0;HDR=Yes;IMEX=1'";
-                OleDbConnection con = new OleDbConnection(SourceConstr);
+            dtExcel.TableName = "MyExcelData";
+            string SourceConstr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source='C:\\Users\\Sathya\\Pictures\\SCOUT-master\\Dialogs\\lastyeareamcetdata.xlsx';Extended Properties= 'Excel 8.0;HDR=Yes;IMEX=1'";
+            OleDbConnection con = new OleDbConnection(SourceConstr);
             string query = "Select * from [Sheet1$]";
-                OleDbDataAdapter data = new OleDbDataAdapter(query, con);
-                data.Fill(dtExcel);
-           
-            string  expression = "College = '"+collegeEntity.Entity.ToUpper()+"'";
+            OleDbDataAdapter data = new OleDbDataAdapter(query, con);
+            data.Fill(dtExcel);
+
+            string expression = "College = '" + collegeEntity.Entity.ToUpper() + "'";
             DataRow[] foundRows;
 
             // Use the Select method to find all rows matching the filter.
@@ -257,21 +260,22 @@ namespace Scout.Dialogs
 
             //Print column 0 of each returned row.
             string res = "";
-           
+
             for (int i = 0; i < foundRows.Length; i++)
             {
-                res += foundRows[i][7] + "     "+ "<br />";
+                res += foundRows[i][7] + "     " + "<br />";
             }
-            
+
             await context.PostAsync(res);
             context.Wait(MessageReceived);
         }
         [LuisIntent("getInformation")]
+        
+
         public async Task getInformation(IDialogContext context, LuisResult result)
         {
-
+             var message = context.MakeMessage();
             var infoEntity = result.Entities.SingleOrDefault(e => e.Type == "College");
-
             System.Data.DataTable dtExcel;
             dtExcel = new System.Data.DataTable();
             dtExcel.TableName = "MyExcelData";
@@ -291,13 +295,40 @@ namespace Scout.Dialogs
             string res = "";
 
 
-            res = "To get further information about the college you can visit this website link" + " " + foundRows[0][19] + "     " + "<br />";
+            
 
+            var receiptCard = new ReceiptCard
+            {
+
+                Title = infoEntity.Entity,
+                Buttons = new List<CardAction>
+            {
+                new CardAction(
+                    ActionTypes.OpenUrl,
+                    "Click Here")
+
+
+            }
+
+            };
+            res = "To get further information about the college you can visit this website link" + " " + foundRows[0][19] + "     " + "<br />";
+            CardAction plbutton = new CardAction() {
+                Title = "Testing"
+            };
 
             await context.PostAsync(res);
             context.Wait(MessageReceived);
-        }
 
+
+            message.Attachments = new List<Attachment>();
+            message.Attachments.Add(receiptCard.ToAttachment());
+
+            await context.PostAsync(message);
+
+           
+           
+        }
+    
         [LuisIntent("getWomen")]
         public async Task getWomen(IDialogContext context, LuisResult result)
         {

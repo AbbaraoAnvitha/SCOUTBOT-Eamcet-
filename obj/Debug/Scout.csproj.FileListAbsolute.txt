@@ -39,7 +39,6 @@ c:\users\sravya datla\documents\visual studio 2015\Projects\Scout\Scout\obj\Debu
 c:\users\sravya datla\documents\visual studio 2015\Projects\Scout\Scout\obj\Debug\Bot Application.dll
 c:\users\sravya datla\documents\visual studio 2015\Projects\Scout\Scout\obj\Debug\Bot Application.pdb
 C:\Users\Sravya Datla\Documents\Visual Studio 2015\Projects\Scout\Scout\obj\Debug\Scout.csproj.ResolveComReference.cache
-C:\Users\Sathya\Pictures\SCOUT-master\obj\Debug\Scout.csprojResolveAssemblyReference.cache
 C:\Users\Sathya\Pictures\SCOUT-master\obj\Debug\Bot Application.dll
 C:\Users\Sathya\Pictures\SCOUT-master\obj\Debug\Bot Application.pdb
 C:\Users\Sathya\Pictures\SCOUT-master\bin\Bot Application.dll.config
@@ -80,3 +79,4 @@ C:\Users\Sathya\Pictures\SCOUT-master\bin\ja\Microsoft.Bot.Builder.resources.dll
 C:\Users\Sathya\Pictures\SCOUT-master\bin\ru\Microsoft.Bot.Builder.resources.dll
 C:\Users\Sathya\Pictures\SCOUT-master\bin\zh-hans\Microsoft.Bot.Builder.resources.dll
 C:\Users\Sathya\Pictures\SCOUT-master\obj\Debug\Scout.csproj.ResolveComReference.cache
+C:\Users\Sathya\Pictures\SCOUT-master\obj\Debug\Scout.csprojResolveAssemblyReference.cache
